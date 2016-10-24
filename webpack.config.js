@@ -25,6 +25,15 @@ const Config = {
         publicPath: _DEV_ ? '/' : 'http://localhost/'
     },
     module:{
+        preLoaders: [
+          {
+            // Eslint loader
+            test: /\.js?$/,
+            loader: 'eslint-loader',
+            include: [path.resolve(__dirname, 'src')],
+            exclude: [/node_modules/,path.resolve(__dirname, 'src/utils')],
+          },
+        ],
         loaders:[
             { test: /\.js?$/, loader: 'babel-loader', exclude: /node_modules/, query: { presets: ['react','es2015','stage-0'] } },
             { test: /\.scss$/, include: path.resolve(__dirname, _BASE_), loader: 'style!css!sass?sourceMap' },
@@ -53,7 +62,10 @@ const Config = {
             name: 'vendors',
             minChunks: Infinity
         })
-    ]
+    ],
+    eslint: {
+      configFile: '.eslintrc',
+    },
 }
 
 Config.module.loaders.concat(
