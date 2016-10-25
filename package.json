@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-dev": "set NODE_ENV=development&&webpack --progress --colors",
+    "deploy-dev": "set NODE_ENV=development&&webpack -p --progress --colors",
     "deploy-dev-server": "set NODE_ENV=development&&webpack --config webpack.config.js --progress --colors&&nodemon app.js",
-    "deploy-server": "set NODE_ENV=production&&webpack --config webpack.config.js --progress --colors&&nodemon app.js"
+    "deploy-server": "set NODE_ENV=production&&webpack -p --config webpack.config.js --progress --colors&&nodemon app.js"
   },
   "repository": {
     "type": "git",
