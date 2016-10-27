@@ -1,6 +1,6 @@
 # ReactScaffold
-React scaffolding using webpack 
-
+React scaffolding using webpack  
+如果觉得这个不够好的，可以点击[这里](http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html)看看阮一峰的react系列，相信你能学到更多
 ##目录
 ```
 src
