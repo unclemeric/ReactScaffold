@@ -51,3 +51,8 @@ webpack.config.js根据启动时候设置的NODE_ENV生成相应环境的文件�
 
 ps：由于第一次使用，还有很多规则没有写到，没写到的可以自己在.eslintrc配置文件增加。eslint会使在编写代码的时候会遇到很多问题...头疼，但是使用这个能是代码更规范！
 ```
+##LINUX环境注意
+```
+set NODE_ENV = production是window的写法  在linux环境下面需写成export NODE = production
+例如在Linux环境下用pm2启动export NODE = production && pm2 start app.js
+```
