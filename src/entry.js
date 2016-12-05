@@ -19,7 +19,7 @@ class App extends React.Component {
       <div>
         <Button amStyle="primary">Hello World</Button>
         <img alt="" src={image} />
-        hello react
+        hello react!
       </div>
      );
   }

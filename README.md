@@ -36,23 +36,32 @@ src
 ##project说明
 ```
 安装全局webpack webpack-dev-server
-"deploy-dev": "set NODE_ENV=development&&webpack --progress --colors",                                           //在根目录生成/build文件夹和编译后的文件
-"deploy-dev-server": "set NODE_ENV=development&&webpack --config webpack.config.js --progress --colors&&nodemon app.js",                //执行deploy-dev-server,等待编译完之后 在浏览器访问:http://localhost:3000
-"deploy-server": "set NODE_ENV=production&&webpack --config webpack.config.js --progress --colors&&nodemon app.js"                        //执行deploy-dev-server,等待编译完之后 在浏览器访问:http://localhost
+"deploy-dev": "webpack --progress --colors",                                           //在根目录生成/build文件夹和编译后的文件
+"deploy-dev-server": "webpack-dev-server --config webpack.config.dev.js --progress --colors",                //执行deploy-dev-server,等待编译完之后 在浏览器访问:http://localhost:3000 有热加载功能 适用于开发
+"deploy-server": "webpack --config webpack.config.js --progress --colors&&nodemon app.js"                        //执行deploy-server,等待编译完之后 在浏览器访问:http://localhost
 相关配置请看config文件
 ```
-##webpack.config.js说明
+##webpack配置文件说明
 ```
-webpack.config.js根据启动时候设置的NODE_ENV生成相应环境的文件：development为开发环境文件，生成的文件未压缩，方便查看；production为生产环境，生成的文件为压缩过后的文件，文件较小。
+webpack.config.js：用于生产环境编译文件。
+webpack.config.dev.js：用于开发阶段编译文件。修改react文件之后会自动编译  不需要手动编译
 ```
 ##关于eslint的使用
 ```
 作用：为避免低级 Bug、产出风格统一的代码，会预先制定编码规范。使用 Lint 工具和代码风格检测工具，则可以辅助编码规范执行，有效控制代码质量。
 
 ps：由于第一次使用，还有很多规则没有写到，没写到的可以自己在.eslintrc配置文件增加。eslint会使在编写代码的时候会遇到很多问题...头疼，但是使用这个能是代码更规范！
-```
-##LINUX环境注意
-```
-set NODE_ENV = production是window的写法  在linux环境下面需写成export NODE = production
-例如在Linux环境下用pm2启动export NODE = production && pm2 start app.js
+不需要的可以在webpack配置文件里面去掉下面两个配置：
+preLoaders: [
+  {
+    // Eslint loader
+    test: /\.js?$/,
+    loader: 'eslint-loader',
+    include: [path.resolve(__dirname, 'src')],
+    exclude: [/node_modules/,path.resolve(__dirname, 'src/utils')],
+  },
+],
+eslint: {
+  configFile: '.eslintrc',
+},
 ```
