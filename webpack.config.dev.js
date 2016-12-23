@@ -10,6 +10,9 @@ const _BASE_ = "./src";
 const output_path = path.resolve(__dirname, "./build");
 const node_modules = path.resolve(__dirname, 'node_modules');
 
+const autoprefixerLoader = `autoprefixer-loader?browsers=last 2 versions`;
+const cssLoader = `style!css?sourceMap${autoprefixerLoader}`;
+
 const Config = {
     devtool: 'eval',
     devServer:{
@@ -40,13 +43,13 @@ const Config = {
             test: /\.js?$/,
             loader: 'eslint-loader',
             include: [path.resolve(__dirname, 'src')],
-            // exclude: [/node_modules/,path.resolve(__dirname, 'src/utils')],
           },
         ],
         loaders:[
             { test: /\.js?$/, loader: 'babel', exclude: /node_modules/, query: { presets: ['react','es2015','stage-0'] } },
-            { test:/\.css$/, include: path.resolve(__dirname, _BASE_), loader: "style!css" },
-            { test: /\.scss$/, include: path.resolve(__dirname, _BASE_), loader: 'style!css!sass?sourceMap' },
+            { test:/\.css$/, include: path.resolve(__dirname, _BASE_), loader: cssLoader },
+            { test:/\.less$/, include: path.resolve(__dirname, _BASE_), loader: `${cssLoader}!less?sourceMap` },
+            { test: /\.scss$/, include: path.resolve(__dirname, _BASE_), loader: `${cssLoader}!sass?sourceMap` },
             { test: /\.(png|jpg|gif|ico)$/, loader:`url?limit=8192&name=images/[hash].[ext]` },
             { test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9=&.]+)?$/, loader : 'file-loader' }
         ]
